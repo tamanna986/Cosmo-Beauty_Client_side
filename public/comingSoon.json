@@ -1,0 +1,26 @@
+[
+    {
+        "brand": "KAYALI",
+        "img": "https://i.ibb.co/47tytmS/hu2.jpg",
+        "name": "Kayali Eden Juicy Apple ",
+        "id": 1
+    },
+    {
+        "brand": "KAYALI",
+        "img": "https://i.ibb.co/QMBhDLD/hu3.jpg",
+        "name": "Kayali Déjà Vu White Flower",
+        "id": 2
+    },
+    {
+        "brand": "KAYALI",
+        "img": "https://i.ibb.co/7QLm6KG/hu3.jpg",
+        "name": "Kayali Invite Only Amber",
+        "id": 3
+    },
+    {
+        "brand": "KAYALI",
+        "img": "https://i.ibb.co/xDjZvNM/hu4.jpg",
+        "name": "Kayali Utopia Vanilla Coco",
+        "id": 4
+    }
+]
