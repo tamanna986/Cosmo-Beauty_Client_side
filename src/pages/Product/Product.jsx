@@ -14,7 +14,7 @@ const Product = ({product}) => {
             {product.name}
           </h2>
           <h1 className=" text-xl  ">${product.price}</h1>
-          {/* <div className="  badge badge-outline ">Price: $ {product.price}</div> */}
+          
           
           </div>
         </div>
@@ -23,7 +23,9 @@ const Product = ({product}) => {
         <Link to ={`/product/${product._id}`} >
         <button className="btn bg-rose-900 text-pink-50 w-full">Details</button>
         </Link>
-        <button className="btn bg-rose-900 text-pink-50">Update</button>
+        <Link to = {`/products/${product._id}`}>
+        <button className="btn bg-rose-900 text-pink-50 w-full">Update</button>
+        </Link>
         
         </div>
      

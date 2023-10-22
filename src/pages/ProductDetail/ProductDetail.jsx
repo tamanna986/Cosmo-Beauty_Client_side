@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
+import Swal from 'sweetalert2'
 
 
 const ProductDetail = () => {
@@ -15,6 +16,38 @@ const ProductDetail = () => {
         .then(data => setProduct(data))
     },[])
     console.log(product)
+    const {name, photo, price} = product;
+
+
+const handleCart = ()=>{
+
+    const cart = {name, photo, price}
+    
+    //  send data to the server
+
+     fetch('http://localhost:5000/myCart' , {
+        method: 'POST',
+        headers:{
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify(cart)
+    })
+    .then(res => res.json())
+    .then(data => {
+        console.log(data);
+        if(data.insertedId){
+            Swal.fire({
+                title: 'Success!',
+                text: 'Product Added to cart Successfully',
+                icon: 'success',
+                confirmButtonText: 'Close'
+              })
+        }
+    })
+
+}
+
+
 
     return (
 <div className="container mx-auto my-20 bg-pink-50">
@@ -27,7 +60,7 @@ const ProductDetail = () => {
       <h1 className="badge badge-outline ">$ {product.price}</h1>
     </div>
       <p className="py-6 text-gray-600">{product.description}</p>
-      <button className="btn bg-rose-900 text-rose-100">Add to Cart</button>
+      <button onClick={handleCart} className="btn bg-rose-900 text-rose-100">Add to Cart</button>
     </div>
   </div>
 </div>
