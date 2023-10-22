@@ -14,6 +14,7 @@ import Register from './pages/Register/Register';
 import LogIn from './pages/LogIn/LogIn';
 import ErrorPage from './pages/ErrorPage/ErrorPage';
 import AddBrand from './pages/AddBrand/AddBrand';
+import ProductsByBrand from './pages/ProductsByBrand/ProductsByBrand';
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,7 @@ const router = createBrowserRouter([
         element: <Home></Home>,
         loader: ()=> fetch('http://localhost:5000/brands')
       },
+
       {
         path: "/addProduct",
         element: <AddProduct></AddProduct>
@@ -46,6 +48,10 @@ const router = createBrowserRouter([
         path: "/Addbrands",
         element:<AddBrand></AddBrand>
       },
+      {
+        path:"/products/:brandName",
+        element: <ProductsByBrand></ProductsByBrand>
+      }
     ]
   },
 ]);
