@@ -20,8 +20,8 @@ const ProductsByBrand = () => {
         fetchProductsByBrand();
     }, [brandName]);
     return (
-        <div>
-            <h1>{products.length}</h1>
+        <div className="container mx-auto">
+         
         <h1 className="text-2xl font-bold text-rose-900 text-center mt-10 ">Products for {brandName}</h1>
         <hr className="w-72 mx-auto"/>
         

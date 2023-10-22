@@ -15,6 +15,7 @@ import LogIn from './pages/LogIn/LogIn';
 import ErrorPage from './pages/ErrorPage/ErrorPage';
 import AddBrand from './pages/AddBrand/AddBrand';
 import ProductsByBrand from './pages/ProductsByBrand/ProductsByBrand';
+import ProductDetail from './pages/ProductDetail/ProductDetail';
 
 const router = createBrowserRouter([
   {
@@ -51,6 +52,11 @@ const router = createBrowserRouter([
       {
         path:"/products/:brandName",
         element: <ProductsByBrand></ProductsByBrand>
+      },
+      {
+        path:"/product/:id",
+        element:<ProductDetail></ProductDetail>,
+        
       }
     ]
   },
