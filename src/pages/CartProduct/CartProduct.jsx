@@ -2,8 +2,8 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import Swal from 'sweetalert2'
 
 
-const CartProduct = ({ cart }) => {
-  const { _id } = cart;
+const CartProduct = ({ cart,updatedCarts, setUpdatedCarts }) => {
+  const { _id  } = cart;
 
   const handleDelete = (_id) => {
     console.log(_id)
@@ -18,11 +18,6 @@ const CartProduct = ({ cart }) => {
     }).then((result) => {
       if (result.isConfirmed) {
 
-    
-
-
-
-
         fetch(`http://localhost:5000/myCart/${_id}`, {
   method: 'DELETE'
 })
@@ -31,6 +26,11 @@ const CartProduct = ({ cart }) => {
   console.log(data);
   if (data.deletedCount > 0) {
     Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
+   
+    // to show remaining product on ui  after deleting
+    const remaining = updatedCarts.filter(updatedCart => updatedCart._id !== _id)
+    setUpdatedCarts(remaining);
+   
   }
 })
 .catch(error => {
