@@ -1,7 +1,16 @@
-
-
+import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../../providers/AuthProvider";
+import { FiChevronsDown } from "react-icons/fi";
+
+
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext)
+  const handleSignOut = () => {
+    logOut();
+  }
+
+
   const navLinks =
   <>
     <li className="text-rose-900"><NavLink to='/' className={({ isActive, isPending }) =>
@@ -30,7 +39,7 @@ const Navbar = () => {
        {navLinks}
       </ul>
     </div>
-    <img  className="w-48 lg:w-52 " src="https://i.ibb.co/cwswz1p/1.png" alt="" />
+    <img  className="w-36 md:w-52 " src="https://i.ibb.co/cwswz1p/1.png" alt="" />
   </div>
   <div className="navbar-center hidden lg:flex">
     <ul className="menu menu-horizontal px-1">
@@ -38,7 +47,38 @@ const Navbar = () => {
     </ul>
   </div>
   <div className="navbar-end">
-    <Link to = "/login"><button className="font-semibold text-rose-900">Log In</button></Link>
+  {
+            user ? <>
+
+             <div className="dropdown mr-2  md:mr-14">
+            <label tabIndex={0} className="btn btn-ghost lg:hidden">
+              <FiChevronsDown></FiChevronsDown>
+            </label>
+            <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-48 ">
+              
+                
+                <div className="flex-col mx-0 lg:mx-1">
+                <p className="text-pink-700 font-semibold">{user.displayName}</p>
+                </div>      
+              
+
+              
+            </ul>
+          </div>
+          <div className="hidden lg:flex lg:flex-col mx-0 lg:mx-1">
+                <p className="text-pink-700 font-semibold">{user.displayName}</p>
+                </div>  
+              <img className="w-10 rounded-full mx-1 lg:mx-2" src={user.photoURL} alt="" />
+                <button onClick={handleSignOut} className="btn btn-sm bg-rose-900 text-white ">Log Out</button>
+
+
+        
+
+            </>
+              :
+              <Link to = "/login"><button className="font-semibold text-rose-900">Log In</button></Link>
+          }
+  
   </div>
 </div>
 

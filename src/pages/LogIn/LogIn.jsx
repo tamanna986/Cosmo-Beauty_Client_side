@@ -1,8 +1,15 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../providers/AuthProvider";
+import Swal from 'sweetalert2'
 
 const LogIn = () => {
     const [error, setError] = useState('')
+    const { signIn , signInWithGoogle , user } = useContext(AuthContext)
+    const location = useLocation();
+    const navigate = useNavigate();
+
+
     const handleLoginSubmit = (e) => {
         e.preventDefault();
         const form = new FormData(e.currentTarget);
@@ -20,7 +27,58 @@ const LogIn = () => {
             return;
         }
         setError('');
+
+
+
+        signIn(email, password)
+            .then(result => {
+                console.log(result.user)
+
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Log In Sucessful',
+                    showConfirmButton: false,
+                    timer: 1500
+                  })
+
+              // to go to desired page using navigate
+              navigate(location?.state ? location.state : '/');
+
+
+            })
+            .catch(error => {
+                console.error(error.message)
+                setError(error.message)
+            })
+
     }
+
+
+    // google log in
+
+    const handleGoogleSignIn = () => {
+        signInWithGoogle()
+            .then(result => {
+                console.log(result.user)
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Log In Sucessful',
+                    showConfirmButton: false,
+                    timer: 1500
+                  })
+                     // to go to desired page using navigate
+                navigate(location?.state ? location.state : '/');
+
+
+            })
+            .catch(error => {
+                console.error(error)
+            })
+    }
+
+    
     return (
   
         <div>
@@ -48,18 +106,24 @@ const LogIn = () => {
                                         <span className="label-text  text-rose-900 text-lg">Password</span>
                                     </label>
                                     <input type="password" placeholder="password" name="password" required className="input input-bordered" />
-                                    
+                                    {
+                                        error && <li className="text-red-600 mt-1 text-center  ">{error}</li>
+
+                                    }
                                     <label className="label mt-2">
                                         <a href="#" className="label-text-alt link link-hover font-bold text-rose-900 ">Forgot password?</a>
                                     </label>
                                 </div>
                                 <div className="form-control mt-2 mb-4">
-                                    <button className="btn bg-rose-900 text-white">Sign In</button>
+                                  
+                                   
+                                    <button className="btn bg-rose-900 text-white w-full">Sign In</button>
+                                   
                                 </div>
 
                                 <div className="flex gap-6 items-center justify-center ml-7">
                                     <h3 className="text-rose-900">Or Sign In with</h3>
-                                    <button className="w-20 rounded-full"><img className="w-10 rounded-full" src="https://i.ibb.co/njZzjPg/search.png" alt="" /></button>
+                                    <button onClick={handleGoogleSignIn}  className="w-20 rounded-full"><img className="w-10 rounded-full" src="https://i.ibb.co/njZzjPg/search.png" alt="" /></button>
 
                                 </div>
 

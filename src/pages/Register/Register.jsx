@@ -1,10 +1,19 @@
-import { useState } from "react";
+import { useContext } from "react";
+import { createContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../providers/AuthProvider";
+import { updateProfile } from "firebase/auth";
+import Swal from 'sweetalert2'
+
 
 
 
 const Register = () => {
     const [error, setError] = useState('');
+    const {createUser} = useContext(AuthContext)
+    
+
+    
     const handleSubmitRegister = (e) => {
         e.preventDefault();
         const form = new FormData(e.currentTarget)
@@ -31,6 +40,40 @@ const Register = () => {
             return;
         }
         setError('');
+
+        // creating user
+        createUser(email , password)
+        .then(res => {
+            console.log(res)
+
+           updateProfile(res.user, {
+                displayName: name,
+                photoURL: photo
+            })
+                .then(() => {
+                    console.log('profile Updated')
+                })
+                .catch((error) => {
+                    console.log(error.message)
+                })
+
+
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Registration Sucessful',
+                    showConfirmButton: false,
+                    timer: 1500
+                  })
+
+        })
+        .catch(error =>{
+            console.log(error)
+        })
+
+
+
+        
 
     }
     
@@ -91,7 +134,10 @@ const Register = () => {
                                 <div className="form-control mt-2 mb-4">
                                     <button className="btn  bg-rose-900 text-white ">Register</button>
                                    
-                                        
+                                    {
+                    error && <li className="text-red-900  mt-10  ">{error}</li>
+                    // <p className="text-red-500 text-xl font-bold">{error}</p>
+                }   
                                  
                                 </div>
 
@@ -99,6 +145,9 @@ const Register = () => {
 
 
                             </div>
+
+
+
                         </div>
                     </div>
 

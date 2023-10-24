@@ -23,7 +23,7 @@ const Product = ({product}) => {
         <Link to ={`/product/${product._id}`} >
         <button className="btn bg-rose-900 text-pink-50 w-full">Details</button>
         </Link>
-        <Link to = {`/products/${product._id}`}>
+        <Link to = {`/update/${product._id}`}>
         <button className="btn bg-rose-900 text-pink-50 w-full">Update</button>
         </Link>
         

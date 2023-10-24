@@ -16,6 +16,9 @@ import ErrorPage from './pages/ErrorPage/ErrorPage';
 import AddBrand from './pages/AddBrand/AddBrand';
 import ProductsByBrand from './pages/ProductsByBrand/ProductsByBrand';
 import ProductDetail from './pages/ProductDetail/ProductDetail';
+import UpdateProducts from './pages/UpdateProducts/UpdateProducts';
+import AuthProvider from './providers/AuthProvider';
+import PrivateRoute from './route/PrivateRoute/PrivateRoute';
 
 const router = createBrowserRouter([
   {
@@ -31,7 +34,7 @@ const router = createBrowserRouter([
 
       {
         path: "/addProduct",
-        element: <AddProduct></AddProduct>
+        element: <PrivateRoute><AddProduct></AddProduct></PrivateRoute>
       },
       {
         path: "/myCart",
@@ -58,6 +61,12 @@ const router = createBrowserRouter([
         path:"/product/:id",
         element:<ProductDetail></ProductDetail>,
         
+      },
+      {
+        path:"/update/:id",
+        element: <UpdateProducts></UpdateProducts> ,
+        loader: ({params}) => fetch(`http://localhost:5000/update/${params.id}`)
+        
       }
     ]
   },
@@ -65,6 +74,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
+     <AuthProvider>
      <RouterProvider router={router} />
+     </AuthProvider>
   </React.StrictMode>,
 )
