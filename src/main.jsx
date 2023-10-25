@@ -29,7 +29,7 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
-        loader: ()=> fetch('http://localhost:5000/brands')
+        loader: ()=> fetch('https://cosmo-beauty.vercel.app/brands')
       },
 
       {
@@ -39,7 +39,7 @@ const router = createBrowserRouter([
       {
         path: "/myCart",
         element: <PrivateRoute><MyCart></MyCart></PrivateRoute>,
-        loader:()=> fetch('http://localhost:5000/myCart')
+        loader:()=> fetch('https://cosmo-beauty.vercel.app/myCart')
       },
       {
         path: "/register",
@@ -65,7 +65,7 @@ const router = createBrowserRouter([
       {
         path:"/update/:id",
         element: <PrivateRoute><UpdateProducts></UpdateProducts></PrivateRoute> ,
-        loader: ({params}) => fetch(`http://localhost:5000/update/${params.id}`)
+        loader: ({params}) => fetch(`https://cosmo-beauty.vercel.app/update/${params.id}`)
         
       }
     ]

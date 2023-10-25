@@ -11,7 +11,7 @@ const ProductDetail = () => {
 
 
     useEffect(() =>{
-        fetch(`http://localhost:5000/product/${id}`)
+        fetch(`https://cosmo-beauty.vercel.app/product/${id}`)
         .then(res => res.json())
         .then(data => setProduct(data))
     },[])
@@ -25,7 +25,7 @@ const handleCart = ()=>{
     
     //  send data to the server
 
-     fetch('http://localhost:5000/myCart' , {
+     fetch('https://cosmo-beauty.vercel.app/myCart' , {
         method: 'POST',
         headers:{
             'content-type': 'application/json'

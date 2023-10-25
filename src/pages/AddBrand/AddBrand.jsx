@@ -11,7 +11,7 @@ const AddBrand = () => {
 
                 // send data to the server
 
-                fetch('http://localhost:5000/brands' , {
+                fetch('https://cosmo-beauty.vercel.app/brands' , {
                     method: 'POST',
                     headers:{
                         'content-type': 'application/json'

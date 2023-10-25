@@ -13,7 +13,7 @@ const ProductsByBrand = () => {
 
     useEffect(() => {
         const fetchProductsByBrand = async () => {
-            const response = await fetch(`http://localhost:5000/products/${brandName}`);
+            const response = await fetch(`https://cosmo-beauty.vercel.app/products/${brandName}`);
             const data = await response.json();
             setProducts(data);
         };

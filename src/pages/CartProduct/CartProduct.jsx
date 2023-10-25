@@ -18,7 +18,7 @@ const CartProduct = ({ cart,updatedCarts, setUpdatedCarts }) => {
     }).then((result) => {
       if (result.isConfirmed) {
 
-        fetch(`http://localhost:5000/myCart/${_id}`, {
+        fetch(`https://cosmo-beauty.vercel.app/myCart/${_id}`, {
   method: 'DELETE'
 })
 .then(res => res.json())
