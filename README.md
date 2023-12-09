@@ -22,4 +22,8 @@
 https://cosmo-beauty-55358.web.app/
 
 
+ **Technology & Tools used**
+HTML, CSS, Tailwind, React, Node.js, MongoDB
+
+
 
